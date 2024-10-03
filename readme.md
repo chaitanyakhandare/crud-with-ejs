@@ -23,7 +23,7 @@ This is a simple Profile Management System built using Express.js and MongoDB. I
    ```
 3. Start the application:
    ```bash
-   npm start
+   node app.js
    ```
 4. Open your browser and navigate to `http://localhost:3000`.
 
