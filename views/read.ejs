@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-zinc-900 text-white">
+    <div class="w-full p-10 space-y-5">
+
+        <div>
+            <a class="text-blue-500 hover:text-blue-700" href="/">
+                < Back to Home</a>
+        </div>
+
+        <h1 class="text-3xl tracking-tighter">All Users</h1>
+        <div class="users flex flex-wrap gap-5">
+
+            <% if (users.length> 0) { %>
+
+                <% users.forEach(user=> { %>
+                    <div onclick="navigateTo('/show/<%= user.id %>')"
+                        class="user p-4 w-64 rounded-lg bg-zinc-800 space-y-5 border border-transparent hover:border-zinc-600 hover:cursor-pointer">
+                        
+                        <div class="w-full h-64 rounded-lg bg-zinc-700 overflow-hidden">
+                            <img class="w-full h-full object-cover object-center" src="<%= user.image %>" alt="">
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl tracking-tighter">
+                                <%= user.name %>
+                            </h3>
+                            <p class="text-sm text-zinc-500">
+                                <%= user.email %>
+                            </p>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <a href="/edit/<%= user._id %>"
+                                class="text-sm font-medium tracking-wide text-yellow-600 hover:text-yellow-700">Edit
+                                User</a>
+                            <a href="#" onclick="confirmDelete('<%= user._id %>', '<%= user.name %>')"
+                                class="text-sm font-medium tracking-wide text-red-500 hover:text-red-700">Delete
+                                User</a>
+                        </div>
+                    </div>
+
+                    <% }) %>
+
+                        <% } else { %>
+                            <h2 class="font-medium text-lg text-zinc-600">No users</h2>
+                            <% } %>
+
+        </div>
+
+    </div>
+
+    <script>
+        function confirmDelete(userId, username) {
+            if (confirm(`Are you sure you want to delete ${username}?`)) {
+                window.location.href = `/delete/${userId}`;
+            }
+        }
+        function navigateTo(route) {
+            window.location.href = route;
+        }
+    </script>
+
+</body>
+
+</html>
